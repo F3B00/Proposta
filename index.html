@@ -22,9 +22,9 @@
     <!-- PULSANTI ACCANTO AL CENTRO -->
     <div style="text-align: center; position: relative;">
         <div id="contenitorePulsanti" style="display: inline-flex; gap: 30px; align-items: center;">
-            <!-- NO - SALTA VIA -->
-            <button id="btnNo" onclick="saltaNo()" onmouseenter="saltaNo()" 
-                    ontouchstart="saltaNo()" ontouchmove="saltaNo()" 
+            <!-- NO - SALTA VIA (ANTI-DOPPIO TOUCH) -->
+            <button id="btnNo" onclick="saltaNo(event)" onmouseenter="saltaNo(event)" 
+                    ontouchstart="saltaNoTouch(event)" ontouchmove="saltaNo(event)" 
                     style="padding: 15px 35px; font-size: 20px; background: white; color: #666; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: all 0.6s ease;">
                 No 😢
             </button>
@@ -50,20 +50,28 @@
     </div>
 
     <script>
+        // Flag anti-rapido (blocca doppi touch entro 500ms)
+        let ultimoSalto = 0;
+        const DELAY_ANTIDOPPIO = 500; // ms
+        
         // ARRAY DI TESTI DIVERTENTI PER NO
         const testiNo = [
-            "No",
-            "Puttana",
-            "CI PERDI TU",
-            "pensaci",
-            "Zoccola",
-            "...",
-            "Bugiarda",
-            "Vai da un altro"
+            "No 😢",
+            "Dai, sì! 🥺",
+            "Sicuro? 🤔",
+            "Pensa ci! ❤️",
+            "Non fare lo scemo! 😂",
+            "Valentina dice sì! 😻",
+            "Bugiardo! 😜",
+            "Prova il Sì! ✨"
         ];
         
-        // NO SALTA + CAMBIA TESTO RANDOM
-        function saltaNo() {
+        // FUNZIONE PRINCIPALE SALTO (per tutti gli eventi)
+        function saltaNo(e) {
+            const ora = Date.now();
+            if (ora - ultimoSalto < DELAY_ANTIDOPPIO) return; // Ignora doppio rapido
+            ultimoSalto = ora;
+            
             const btnNo = document.getElementById('btnNo');
             const paginaLarghezza = window.innerWidth - 200;
             const paginaAltezza = window.innerHeight - 150;
@@ -74,12 +82,21 @@
             
             // SALTO CASUALE LONTANO
             const x = Math.random() * paginaLarghezza;
-            const y = Math.random() * paginaAltezza + 100; // evita troppo in alto
+            const y = Math.random() * paginaAltezza + 100;
             
             btnNo.style.position = 'fixed';
             btnNo.style.left = x + 'px';
             btnNo.style.top = y + 'px';
             btnNo.style.zIndex = '999';
+            
+            if (e) e.preventDefault(); // Blocca propagazione
+            if (e) e.stopPropagation();
+        }
+        
+        // SPECIFICO PER TOUCHSTART (blocca click emulato)
+        function saltaNoTouch(e) {
+            e.preventDefault(); // Impedisce click dopo touch
+            saltaNo(e);
         }
         
         // SÌ mostra GIF + NASCONDE il NO
