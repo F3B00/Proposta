@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -24,14 +23,12 @@
     <div style="text-align: center; position: relative;">
         <div id="contenitorePulsanti" style="display: inline-flex; gap: 30px; align-items: center;">
             <!-- NO - SALTA VIA -->
-           <!-- NO - SALTA VIA (PC + TELEFONO) -->
-           <button id="btnNo" onclick="saltaNo()" onmouseenter="saltaNo()" 
-        ontouchstart="saltaNo()" ontouchmove="saltaNo()" 
-        style="padding: 15px 35px; font-size: 20px; background: white; color: #666; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: all 0.6s ease;">
-         No 😢
-       </button>
+            <button id="btnNo" onclick="saltaNo()" onmouseenter="saltaNo()" 
+                    ontouchstart="saltaNo()" ontouchmove="saltaNo()" 
+                    style="padding: 15px 35px; font-size: 20px; background: white; color: #666; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: all 0.6s ease;">
+                No 😢
+            </button>
 
-            
             <!-- SÌ - FISSO -->
             <button id="btnSi" onclick="mostraGif()" 
                     style="padding: 15px 35px; font-size: 20px; background: linear-gradient(45deg, #ff69b4, #ff1493); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(255,105,180,0.4);">
@@ -41,29 +38,43 @@
     </div>
     
     <!-- GIF AL CENTRO (nascosta inizialmente) -->
-
-<div id="gifContainer" style="text-align: center; padding: 60px; display: none;">
-    <img src="https://tenor.com/view/cat-tongue-cat-cats-ahh-excited-gif-6508383405014947627.gif" 
-         style="max-width: 700px; max-height: 800px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3);" 
-         alt="Gatto eccitato">
-    
-    <!-- TESTO IN ARIAL SOTTO -->
-    <p style="font-family: Arial, sans-serif; font-size: 24px; color: #333; margin-top: 20px; font-weight: bold;">
-        GODO GODO GODO
-    </p>
-</div>
-
+    <div id="gifContainer" style="text-align: center; padding: 60px; display: none;">
+        <img src="https://tenor.com/view/cat-tongue-cat-cats-ahh-excited-gif-6508383405014947627.gif" 
+             style="max-width: 700px; max-height: 800px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3);" 
+             alt="Gatto eccitato">
+        
+        <!-- TESTO IN ARIAL SOTTO -->
+        <p style="font-family: Arial, sans-serif; font-size: 24px; color: #333; margin-top: 20px; font-weight: bold;">
+            GODO GODO GODO
+        </p>
+    </div>
 
     <script>
-        // NO SALTA IN POSIZIONE CASUALE (mouseenter + click)
+        // ARRAY DI TESTI DIVERTENTI PER NO
+        const testiNo = [
+            "No",
+            "Puttana",
+            "CI PERDI TU",
+            "pensaci",
+            "Zoccola",
+            "...",
+            "Bugiarda",
+            "Vai da un altro"
+        ];
+        
+        // NO SALTA + CAMBIA TESTO RANDOM
         function saltaNo() {
             const btnNo = document.getElementById('btnNo');
             const paginaLarghezza = window.innerWidth - 200;
             const paginaAltezza = window.innerHeight - 150;
             
+            // CAMBIA TESTO RANDOM
+            const randomTesto = testiNo[Math.floor(Math.random() * testiNo.length)];
+            btnNo.innerHTML = randomTesto;
+            
             // SALTO CASUALE LONTANO
             const x = Math.random() * paginaLarghezza;
-            const y = Math.random() * paginaAltezza + 100; // evita di saltare troppo in alto
+            const y = Math.random() * paginaAltezza + 100; // evita troppo in alto
             
             btnNo.style.position = 'fixed';
             btnNo.style.left = x + 'px';
@@ -71,19 +82,15 @@
             btnNo.style.zIndex = '999';
         }
         
-        // SÌ mostra // SÌ mostra GIF + NASCONDE il NO
-            function mostraGif() {
+        // SÌ mostra GIF + NASCONDE il NO
+        function mostraGif() {
             document.getElementById('gifContainer').style.display = 'block';
-             document.getElementById('gifContainer').scrollIntoView({ behavior: 'smooth' });
-    
-    // NASCONDE il NO
-              document.getElementById('btnNo').style.display = 'none';
-}
-
+            document.getElementById('gifContainer').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('btnNo').style.display = 'none';
+        }
     </script>
 </body>
 </html>
-
 
 
 
