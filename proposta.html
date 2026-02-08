@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<a href="https://www.google.com" target="_blank">Clicca qui</a>
+
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta</title>
+    
+    <!-- TUO FONT PACIFICO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; height: 100vh; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); overflow-x: hidden; font-family: 'Pacifico', cursive;">
+    
+    <!-- TITOLO -->
+    <div style="text-align: center; padding: 60px 20px;">
+        <h1 style="color: #ff1493; font-size: 40px; margin: 0; text-shadow: 2px 2px 8px rgba(0,0,0,0.2);">
+            Vuoi essere la mia valentina?
+        </h1>
+    </div>
+    
+    <!-- PULSANTI ACCANTO AL CENTRO -->
+    <div style="text-align: center; position: relative;">
+        <div id="contenitorePulsanti" style="display: inline-flex; gap: 30px; align-items: center;">
+            <!-- NO - SALTA VIA -->
+            <button id="btnNo" onclick="saltaNo()" onmouseenter="saltaNo()" 
+                    style="padding: 15px 35px; font-size: 20px; background: white; color: #666; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: all 0.6s ease;">
+                No, troia 😢
+            </button>
+            
+            <!-- SÌ - FISSO -->
+            <button id="btnSi" onclick="mostraGif()" 
+                    style="padding: 15px 35px; font-size: 20px; background: linear-gradient(45deg, #ff69b4, #ff1493); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(255,105,180,0.4);">
+                Sì ❤️
+            </button>
+        </div>
+    </div>
+    
+    <!-- GIF AL CENTRO (nascosta inizialmente) -->
+
+<div id="gifContainer" style="text-align: center; padding: 60px; display: none;">
+    <img src="https://tenor.com/view/cat-tongue-cat-cats-ahh-excited-gif-6508383405014947627.gif" 
+         style="max-width: 700px; max-height: 800px; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.3);" 
+         alt="Gatto eccitato">
+    
+    <!-- TESTO IN ARIAL SOTTO -->
+    <p style="font-family: Arial, sans-serif; font-size: 24px; color: #333; margin-top: 20px; font-weight: bold;">
+        GODO GODO GODO
+    </p>
+</div>
+
+
+    <script>
+        // NO SALTA IN POSIZIONE CASUALE (mouseenter + click)
+        function saltaNo() {
+            const btnNo = document.getElementById('btnNo');
+            const paginaLarghezza = window.innerWidth - 200;
+            const paginaAltezza = window.innerHeight - 150;
+            
+            // SALTO CASUALE LONTANO
+            const x = Math.random() * paginaLarghezza;
+            const y = Math.random() * paginaAltezza + 100; // evita di saltare troppo in alto
+            
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+            btnNo.style.zIndex = '999';
+        }
+        
+        // SÌ mostra // SÌ mostra GIF + NASCONDE il NO
+            function mostraGif() {
+            document.getElementById('gifContainer').style.display = 'block';
+             document.getElementById('gifContainer').scrollIntoView({ behavior: 'smooth' });
+    
+    // NASCONDE il NO
+              document.getElementById('btnNo').style.display = 'none';
+}
+
+    </script>
+</body>
+</html>
