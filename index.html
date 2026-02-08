@@ -24,10 +24,13 @@
     <div style="text-align: center; position: relative;">
         <div id="contenitorePulsanti" style="display: inline-flex; gap: 30px; align-items: center;">
             <!-- NO - SALTA VIA -->
-            <button id="btnNo" onclick="saltaNo()" onmouseenter="saltaNo()" 
-                    style="padding: 15px 35px; font-size: 20px; background: white; color: #666; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: all 0.6s ease;">
-                No, troia 😢
-            </button>
+           <!-- NO - SALTA VIA (PC + TELEFONO) -->
+           <button id="btnNo" onclick="saltaNo()" onmouseenter="saltaNo()" 
+        ontouchstart="saltaNo()" ontouchmove="saltaNo()" 
+        style="padding: 15px 35px; font-size: 20px; background: white; color: #666; border: none; border-radius: 30px; cursor: pointer; box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: all 0.6s ease;">
+         No 😢
+       </button>
+
             
             <!-- SÌ - FISSO -->
             <button id="btnSi" onclick="mostraGif()" 
@@ -80,5 +83,6 @@
     </script>
 </body>
 </html>
+
 
 
